@@ -18,26 +18,27 @@ nav{
     color: white;
     z-index: 2;
     position: relative;
-    padding: 4rem 8rem;
+    padding: 8vw 8vw;
     display: flex;
     justify-content: space-between;
 }
 nav a{
     text-decoration: none;
     color: white;
-    font-weight: bold;
 }
 nav ul{
     list-style: none;
     display: flex;
-    gap:4rem;
+    gap:5vw;
 }
 .title{
     color: white;
     z-index: 2;
+    text-align: center;
     position: absolute;
-    font-size: 3rem;
+    font-size: 8vw;
+    line-height: 8vw;
     left: 50%;
-    top:85%;
+    top:80%;
     transform: translate(-50%, -25%);
 }

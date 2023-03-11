@@ -5,6 +5,7 @@ import {OrbitControls} from "three/addons/controls/OrbitControls.js";
 
 //import textures
 const spaceTexture = new THREE.TextureLoader().load('./assets/space.jpg');
+const mSpaceTexture = new THREE.TextureLoader().load('./assets/mobBg.jpg');
 const uvTexture = new THREE.TextureLoader().load('./assets/colors.jpg');
 const bumpTexture = new THREE.TextureLoader().load('./assets/bump.jpg');
 
@@ -38,8 +39,9 @@ scene.add(light);
 const sunLight = new THREE.DirectionalLight(0xffffff, 1);
 sunLight.position.set(10, 10, 20);
 scene.add(sunLight);
-scene.background = spaceTexture;
 
+//Add bg image
+scene.background = mSpaceTexture;
 
 //camera
 const camera = new THREE.PerspectiveCamera(45, sizes.width/sizes.height, 0.1,100);
@@ -88,20 +90,20 @@ tl.fromTo("nav", {y:"-100%"}, {y:"0%"});
 tl.fromTo(".title", {opacity:0}, {opacity:1});
 
 //mouse animation color
-let mouseDown = false;
-let rgb = [];
-window.addEventListener("mousedown", () => (mouseDown = true));
-window.addEventListener("mouseup", () => (mouseDown = false));
+// let mouseDown = false;
+// let rgb = [];
+// window.addEventListener("mousedown", () => (mouseDown = true));
+// window.addEventListener("mouseup", () => (mouseDown = false));
 
-window.addEventListener('mousemove', (e) => {
-    if(mouseDown){
-        rgb = [
-            Math.round((e.pageX/sizes.width)*255),
-            Math.round((e.pageY/sizes.height)*255),
-            150,
-        ]
-        //animate
-        let newColor = new THREE.Color(`rgb(${rgb.join(",")})`);
-        gsap.to(light.material.color, {r:newColor.r,g:newColor.g,b:newColor.b})
-    }
-})
+// window.addEventListener('mousemove', (e) => {
+//     if(mouseDown){
+//         rgb = [
+//             Math.round((e.pageX/sizes.width)*255),
+//             Math.round((e.pageY/sizes.height)*255),
+//             150,
+//         ]
+//         //animate
+//         let newColor = new THREE.Color(`rgb(${rgb.join(",")})`);
+//         gsap.to(light.material.color, {r:newColor.r,g:newColor.g,b:newColor.b})
+//     }
+// })
