@@ -4,7 +4,6 @@ import gsap from "gsap";
 import {OrbitControls} from "three/addons/controls/OrbitControls.js";
 
 //import textures
-const spaceTexture = new THREE.TextureLoader().load('./assets/space.jpg');
 const mSpaceTexture = new THREE.TextureLoader().load('./assets/mobBg.jpg');
 const uvTexture = new THREE.TextureLoader().load('./assets/colors.jpg');
 const bumpTexture = new THREE.TextureLoader().load('./assets/bump.jpg');
@@ -12,11 +11,9 @@ const bumpTexture = new THREE.TextureLoader().load('./assets/bump.jpg');
 //scene
 const scene = new THREE.Scene();
 
-//create our sphere
+//create earth
 const geometry = new THREE.SphereGeometry(3, 64, 64);
 const material = new THREE.MeshStandardMaterial({
-    // color: "#00ff83",
-    // roughness: 0.4,
     map: uvTexture,
     bumpMap: bumpTexture,
     bumpScale:0.5,
@@ -28,15 +25,11 @@ const sizes = {
     height: window.innerHeight,
 }
 
-const mesh = new THREE.Mesh(geometry, material);
-scene.add(mesh);
+const earth = new THREE.Mesh(geometry, material);
+scene.add(earth);
 
 //Light
-const light = new THREE.PointLight(0xffffff, 1,100);
-light.position.set(0,10,10);
-light.intensity = 1.25;
-scene.add(light);
-const sunLight = new THREE.DirectionalLight(0xffffff, 1);
+const sunLight = new THREE.DirectionalLight(0xffffff, 2);
 sunLight.position.set(10, 10, 20);
 scene.add(sunLight);
 
@@ -61,7 +54,6 @@ renderer.render(scene, camera);
 const controls = new OrbitControls(camera, canvas);
 controls.enableDamping = true;
 controls.enablePan = false;
-// controls.enableZoom = false;
 controls.autoRotate = true;
 controls.autoRotateSpeed = 5;
 
@@ -85,25 +77,7 @@ loop();
 
 //Timeline magic
 const tl = gsap.timeline({defaults:{duration:1}});
-tl.fromTo(mesh.scale, {z:0, x:0, y:0}, {z:1, x:1, y:1});
+tl.fromTo(earth.scale, {z:0, x:0, y:0}, {z:1, x:1, y:1});
 tl.fromTo("nav", {y:"-100%"}, {y:"0%"});
 tl.fromTo(".title", {opacity:0}, {opacity:1});
 
-//mouse animation color
-// let mouseDown = false;
-// let rgb = [];
-// window.addEventListener("mousedown", () => (mouseDown = true));
-// window.addEventListener("mouseup", () => (mouseDown = false));
-
-// window.addEventListener('mousemove', (e) => {
-//     if(mouseDown){
-//         rgb = [
-//             Math.round((e.pageX/sizes.width)*255),
-//             Math.round((e.pageY/sizes.height)*255),
-//             150,
-//         ]
-//         //animate
-//         let newColor = new THREE.Color(`rgb(${rgb.join(",")})`);
-//         gsap.to(light.material.color, {r:newColor.r,g:newColor.g,b:newColor.b})
-//     }
-// })
